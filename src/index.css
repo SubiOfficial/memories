@@ -1,0 +1,284 @@
+@import "tailwindcss";
+
+:root {
+  --bg-0: #05060a;
+  --bg-1: #0b0d16;
+  --bg-2: #12141f;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-strong: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.12);
+  --text-primary: #f5f6fa;
+  --text-secondary: rgba(245, 246, 250, 0.6);
+  --accent: #7dd8ff;
+  --accent-2: #b98cff;
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg-0: #eef1f7;
+  --bg-1: #e4e8f1;
+  --bg-2: #dbe0ec;
+  --surface: rgba(255, 255, 255, 0.55);
+  --surface-strong: rgba(255, 255, 255, 0.8);
+  --border: rgba(20, 24, 40, 0.1);
+  --text-primary: #14182a;
+  --text-secondary: rgba(20, 24, 42, 0.6);
+  --accent: #2f8fd6;
+  --accent-2: #8a5cf6;
+  --shadow-soft: 0 8px 32px rgba(20, 24, 40, 0.12);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: calc(16px * var(--app-text-scale, 1));
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-family, "Inter", system-ui, -apple-system, "Segoe UI", sans-serif);
+  background: radial-gradient(circle at 50% 0%, var(--bg-1), var(--bg-0) 60%);
+  color: var(--text-primary);
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+canvas {
+  touch-action: none;
+}
+
+.glass-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: var(--shadow-soft);
+}
+
+.glass-panel-strong {
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: var(--shadow-soft);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+input,
+select,
+button {
+  font-family: inherit;
+}
+
+.text-gradient {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.song-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), 0 0 24px -6px var(--accent-2);
+}
+
+.meteor-core {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  margin-top: -15px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #fffef2 0%,
+    #ffe9a8 18%,
+    #ffb648 42%,
+    #ff6a1f 68%,
+    #b3220a 100%
+  );
+  box-shadow:
+    0 0 14px 6px rgba(255, 150, 40, 0.85),
+    0 0 34px 18px rgba(255, 90, 20, 0.55),
+    0 0 70px 34px rgba(255, 60, 10, 0.28);
+  animation: meteor-flicker 0.12s infinite alternate;
+}
+
+.meteor-trail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 220px;
+  height: 16px;
+  margin-top: -8px;
+  transform-origin: 100% 50%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 200, 90, 0) 0%,
+    rgba(255, 150, 40, 0.35) 40%,
+    rgba(255, 210, 120, 0.85) 100%
+  );
+  filter: blur(3px);
+}
+
+@keyframes meteor-flicker {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.25);
+  }
+}
+
+.love-heart {
+  width: 80px;
+  height: 80px;
+  transform: rotate(-45deg);
+  position: relative;
+  background: linear-gradient(135deg, #ff97a1, #ff6f7f 60%, #e0455a);
+  filter: drop-shadow(0 0 18px rgba(255, 111, 127, 0.65)) drop-shadow(0 10px 16px rgba(60, 10, 24, 0.35));
+  animation: love-beat 2.6s ease-in-out infinite;
+  transition: transform 0.18s ease, filter 0.5s ease;
+}
+.love-heart::before,
+.love-heart::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: inherit;
+}
+.love-heart::before {
+  top: -40px;
+  left: 0;
+}
+.love-heart::after {
+  left: 40px;
+  top: 0;
+}
+.love-heart.is-liked {
+  filter: drop-shadow(0 0 34px rgba(255, 151, 161, 1)) drop-shadow(0 0 60px rgba(231, 183, 104, 0.55));
+}
+.love-heart.pop {
+  animation: love-pop 0.5s ease;
+}
+
+@keyframes love-beat {
+  0%,
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  12% {
+    transform: rotate(-45deg) scale(1.1);
+  }
+  24% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+@keyframes love-pop {
+  0% {
+    transform: rotate(-45deg) scale(1);
+  }
+  35% {
+    transform: rotate(-45deg) scale(1.35);
+  }
+  60% {
+    transform: rotate(-45deg) scale(0.92);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+.love-mini-heart {
+  width: 14px;
+  height: 14px;
+  transform: rotate(-45deg);
+  background: #ff6f7f;
+  position: relative;
+  margin-top: 2px;
+}
+.love-mini-heart::before,
+.love-mini-heart::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #ff6f7f;
+  border-radius: 50%;
+}
+.love-mini-heart::before {
+  top: -7px;
+  left: 0;
+}
+.love-mini-heart::after {
+  left: 7px;
+  top: 0;
+}
+
+.love-dot {
+  width: 8px;
+  height: 8px;
+  transform: rotate(-45deg);
+  background: #e7b768;
+  position: relative;
+  flex-shrink: 0;
+}
+.love-dot::before,
+.love-dot::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: inherit;
+}
+.love-dot::before {
+  top: -4px;
+  left: 0;
+}
+.love-dot::after {
+  left: 4px;
+  top: 0;
+}
+
+.love-postmark {
+  border: 1.5px solid #5c2a49;
+}
+.love-postmark::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid #5c2a49;
+  border-radius: 50%;
+}
